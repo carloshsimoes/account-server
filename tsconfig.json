@@ -1,0 +1,16 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "lib": ["es2015"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "bin",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false
+  },
+  "include": [
+    "src",
+    "test",
+  ],
+}

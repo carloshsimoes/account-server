@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  test-database:
+    container_name: database
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'root'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./src/application/orm/scripts/create-database.sql:/docker-entrypoint-initdb.d/create-database.sql
+    ports:
+      - '5432:5432'
+
+  local-api:
+    container_name: api
+    depends_on:
+      - test-database
+    build: .
+    environment:
+      API_PORT: 3000
+      DB_HOST: 'test-database'
+      DB_PORT: 5432
+      DB_USERNAME: 'root'
+      DB_PASSWORD: 'root'
+      DB_DATABASE: 'seletoDB'
+      JWT_PRIVATE_KEY_PATH: './_keys/private.pem'
+      JWT_PUBLIC_KEY_PATH: './_keys/public.pem'
+      JWT_EXPIRES_IN: 3600
+      JWT_ALGORITHM: 'RS256'
+      SENDGRID_API_KEY: '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'
+      SENDGRID_TEMPLATES_VERIFY_ACCOUNT: 'd-29d3c60e924c4dbfac6f113a21ddedec'
+      SENDGRID_TEMPLATES_FORGET_PASSWORD: '8a22419c-fc76-40af-a1e8-c1a2ce472920'
+      SENDGRID_TEMPLATES_LOGIN_MFA_TOKEN: '8a22419c-fc76-40af-a1e8-c1a2ce472920'
+      SENDGRID_SENDER_EMAIL: 'noreply@heronlabs.com.br'
+    command: yarn api:start
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/app
+
+volumes:
+  postgres:

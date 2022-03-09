@@ -1,4 +1,4 @@
-# Um servidor em Node em Typescript.
+# Um modelo de servidor em Typescript.
 
 - DDD
 - TDD

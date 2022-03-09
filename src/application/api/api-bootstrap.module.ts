@@ -9,8 +9,8 @@ import {EnvironmentModule} from '../../infraestructure/environment/core/environm
 import {ApiConfiguration} from './api-configuration';
 import {SessionController} from './controllers/session/session-controller';
 import {UserController} from './controllers/user/user-controller';
-import {CoreExceptionsFilter} from './filters/core-exceptions.filter';
 import {JwtFactory} from './factories/jwt-factory';
+import {CoreExceptionsFilter} from './filters/core-exceptions.filter';
 import {JwtGuard} from './ingress/jwt/jwt.guard';
 import {JwtStrategy} from './ingress/jwt/jwt.strategy';
 
